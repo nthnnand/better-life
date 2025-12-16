@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-brand">
+                <i class="fas fa-heart"></i>
+                <span>BetterLife Admin</span>
+            </div>
+            <div class="admin-user-menu">
+                <span class="user-name">Admin</span>
+                <div class="user-dropdown">
+                    <a href="../index.html" class="dropdown-item">
+                        <i class="fas fa-home"></i> Website
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <a href="../auth/login.html" class="dropdown-item logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="module-management.html" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>Modul CBT</span>
+                </a>
+                <a href="video-management.html" class="nav-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                <a href="podcast-management.html" class="nav-item">
+                    <i class="fas fa-podcast"></i>
+                    <span>Podcast</span>
+                </a>
+                <a href="user-management.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="page-header">
+                <h1>Dashboard Admin</h1>
+                <p>Kelola konten dan pengguna BetterLife</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,234</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>15</h3>
+                        <p>Modul CBT</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>47</h3>
+                        <p>Video</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>23</h3>
+                        <p>Podcast</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="module-management.html?action=add" class="action-card">
+                        <i class="fas fa-plus"></i>
+                        <span>Tambah Modul CBT</span>
+                    </a>
+                    <a href="video-management.html?action=add" class="action-card">
+                        <i class="fas fa-video"></i>
+                        <span>Upload Video</span>
+                    </a>
+                    <a href="podcast-management.html?action=add" class="action-card">
+                        <i class="fas fa-podcast"></i>
+                        <span>Tambah Podcast</span>
+                    </a>
+                    <a href="user-management.html" class="action-card">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Kelola Users</span>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>

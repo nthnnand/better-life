@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Gejala - BetterLife</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="assessment-container">
+            <div class="assessment-progress">
+                <div class="progress-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <span>Informasi Dasar</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <span>Suasana Hati</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <span>Pola Tidur</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <div class="step-number">4</div>
+                        <span>Kecemasan</span>
+                    </div>
+                    <div class="step" data-step="5">
+                        <div class="step-number">5</div>
+                        <span>Hasil</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="assessmentForm" class="assessment-form">
+                <!-- Step 1: Informasi Dasar -->
+                <div class="form-step active" data-step="1">
+                    <div class="step-header">
+                        <h2>Informasi Dasar</h2>
+                        <p>Mari kenali diri Anda lebih baik</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Usia</label>
+                        <input type="number" class="form-control" name="age" min="12" max="100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Jenis Kelamin</label>
+                        <div class="radio-group">
+                            <label class="radio">
+                                <input type="radio" name="gender" value="male" required>
+                                <span>Laki-laki</span>
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="gender" value="female">
+                                <span>Perempuan</span>
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="gender" value="other">
+                                <span>Lainnya</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Aktivitas Utama</label>
+                        <select class="form-control" name="occupation" required>
+                            <option value="">Pilih aktivitas utama</option>
+                            <option value="student">Pelajar/Mahasiswa</option>
+                            <option value="worker">Bekerja</option>
+                            <option value="freelance">Freelance</option>
+                            <option value="unemployed">Sedang tidak bekerja</option>
+                            <option value="other">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Step 2: Suasana Hati -->
+                <div class="form-step" data-step="2">
+                    <div class="step-header">
+                        <h2>Suasana Hati & Emosi</h2>
+                        <p>Bagaimana perasaan Anda dalam 2 minggu terakhir?</p>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>1. Seberapa sering Anda merasa sedih atau murung?</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="mood_sad" value="never" required>
+                                <div class="option-content">
+                                    <span class="option-emoji">😊</span>
+                                    <span class="option-text">Jarang sekali</span>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="mood_sad" value="rarely">
+                                <div class="option-content">
+                                    <span class="option-emoji">🙂</span>
+                                    <span class="option-text">Beberapa hari</span>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="mood_sad" value="sometimes">
+                                <div class="option-content">
+                                    <span class="option-emoji">😐</span>
+                                    <span class="option-text">Lebih dari seminggu</span>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="mood_sad" value="often">
+                                <div class="option-content">
+                                    <span class="option-emoji">😔</span>
+                                    <span class="option-text">Hampir setiap hari</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>2. Bagaimana tingkat energi Anda?</h3>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" name="energy" value="high" required>
+                                <div class="option-content">
+                                    <span class="option-emoji">💪</span>
+                                    <span class="option-text">Bersemangat</span>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="energy" value="normal">
+                                <div class="option-content">
+                                    <span class="option-emoji">👍</span>
+                                    <span class="option-text">Normal</span>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="energy" value="low">
+                                <div class="option-content">
+                                    <span class="option-emoji">😴</span>
+                                    <span class="option-text">Cepat lelah</span>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="energy" value="very_low">
+                                <div class="option-content">
+                                    <span class="option-emoji">😫</span>
+                                    <span class="option-text">Sangat lelah</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Pola Tidur -->
+                <div class="form-step" data-step="3">
+                    <div class="step-header">
+                        <h2>Pola Tidur & Istirahat</h2>
+                        <p>Bagaimana kualitas tidur dan istirahat Anda?</p>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>3. Bagaimana kualitas tidur Anda?</h3>
+                        <div class="options-list">
+                            <label class="option">
+                                <input type="radio" name="sleep_quality" value="excellent" required>
+                                <span>Tidur nyenyak 7-9 jam setiap malam</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="sleep_quality" value="good">
+                                <span>Tidur cukup, tapi kadang terbangun</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="sleep_quality" value="fair">
+                                <span>Sulit tidur atau tidur tidak nyenyak</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="sleep_quality" value="poor">
+                                <span>Sering insomnia atau mimpi buruk</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>4. Apakah Anda mengalami perubahan nafsu makan?</h3>
+                        <div class="options-list">
+                            <label class="option">
+                                <input type="radio" name="appetite" value="normal" required>
+                                <span>Normal, tidak ada perubahan</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="appetite" value="increased">
+                                <span>Nafsu makan meningkat</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="appetite" value="decreased">
+                                <span>Nafsu makan menurun</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="appetite" value="fluctuating">
+                                <span>Sangat berubah-ubah</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Kecemasan -->
+                <div class="form-step" data-step="4">
+                    <div class="step-header">
+                        <h2>Kecemasan & Stres</h2>
+                        <p>Bagaimana tingkat stres dan kecemasan Anda?</p>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>5. Seberapa sering Anda merasa cemas atau khawatir?</h3>
+                        <div class="scale-rating">
+                            <div class="scale-labels">
+                                <span>Tidak pernah</span>
+                                <span>Sangat sering</span>
+                            </div>
+                            <div class="scale-options">
+                                <label class="scale-option">
+                                    <input type="radio" name="anxiety" value="1" required>
+                                    <span>1</span>
+                                </label>
+                                <label class="scale-option">
+                                    <input type="radio" name="anxiety" value="2">
+                                    <span>2</span>
+                                </label>
+                                <label class="scale-option">
+                                    <input type="radio" name="anxiety" value="3">
+                                    <span>3</span>
+                                </label>
+                                <label class="scale-option">
+                                    <input type="radio" name="anxiety" value="4">
+                                    <span>4</span>
+                                </label>
+                                <label class="scale-option">
+                                    <input type="radio" name="anxiety" value="5">
+                                    <span>5</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>6. Bagaimana hubungan Anda dengan orang sekitar?</h3>
+                        <div class="options-list">
+                            <label class="option">
+                                <input type="radio" name="social" value="excellent" required>
+                                <span>Hubungan baik dan supportive</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="social" value="good">
+                                <span>Cukup baik, ada beberapa konflik</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="social" value="fair">
+                                <span>Sering konflik atau tidak nyaman</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="social" value="poor">
+                                <span>Menghindari interaksi sosial</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <h3>7. Apakah Anda mengalami gejala fisik seperti?</h3>
+                        <div class="checkbox-group">
+                            <label class="checkbox">
+                                <input type="checkbox" name="symptoms" value="headache">
+                                <span>Sakit kepala</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="symptoms" value="stomach">
+                                <span>Sakit perut</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="symptoms" value="muscle_tension">
+                                <span>Tegang otot</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="symptoms" value="fatigue">
+                                <span>Kelelahan</span>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="symptoms" value="none">
+                                <span>Tidak ada gejala fisik</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-navigation">
+                    <button type="button" class="btn btn-secondary" id="prev-btn" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Sebelumnya
+                    </button>
+                    <button type="button" class="btn btn-primary" id="next-btn">
+                        Selanjutnya <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button type="submit" class="btn btn-success" id="submit-btn" style="display: none;">
+                        <i class="fas fa-check"></i> Lihat Hasil
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .assessment-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+        }
+
+        .assessment-progress {
+            margin-bottom: 40px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--light-gray);
+            z-index: 1;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step.active .step-number {
+            background: var(--turquoise);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .step span {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+
+        .step.active span {
+            color: var(--turquoise);
+            font-weight: 600;
+        }
+
+        .assessment-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .step-header h2 {
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .step-header p {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+
+        .question-group {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .question-group:last-child {
+            border-bottom: none;
+        }
+
+        .question-group h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .option-card {
+            border: 2px solid var(--light-gray);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-card:hover {
+            border-color: var(--turquoise);
+            transform: translateY(-2px);
+        }
+
+        .option-card input:checked + .option-content {
+            color: var(--turquoise);
+        }
+
+        .option-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-emoji {
+            font-size: 2rem;
+        }
+
+        .option-text {
+            font-weight: 500;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--turquoise);
+            background: var(--light-blue);
+        }
+
+        .option input {
+            margin-right: 15px;
+        }
+
+        .option span {
+            font-weight: 500;
+        }
+
+        .scale-rating {
+            text-align: center;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .scale-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .scale-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .scale-option input {
+            display: none;
+        }
+
+        .scale-option span {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .scale-option input:checked + span {
+            background: var(--turquoise);
+            border-color: var(--turquoise);
+            color: var(--white);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox:hover {
+            border-color: var(--turquoise);
+        }
+
+        .checkbox input:checked + span {
+            color: var(--turquoise);
+            font-weight: 600;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #17a78b;
+        }
+
+        @media (max-width: 768px) {
+            .progress-steps {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .progress-steps::before {
+                display: none;
+            }
+
+            .step {
+                flex-direction: row;
+                gap: 15px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .form-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .form-navigation .btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Show current step
+            document.querySelector(`[data-step="${step}"]`).classList.add('active');
+            
+            // Update progress steps
+            document.querySelectorAll('.step').forEach((stepElement, index) => {
+                const stepNumber = index + 1;
+                if (stepNumber < step) {
+                    stepElement.classList.add('completed');
+                    stepElement.classList.remove('active');
+                } else if (stepNumber === step) {
+                    stepElement.classList.add('active');
+                    stepElement.classList.remove('completed');
+                } else {
+                    stepElement.classList.remove('active', 'completed');
+                }
+            });
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').style.display = step > 1 ? 'flex' : 'none';
+            document.getElementById('next-btn').style.display = step < totalSteps ? 'flex' : 'none';
+            document.getElementById('submit-btn').style.display = step === totalSteps ? 'flex' : 'none';
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const answers = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (key === 'symptoms') {
+                    if (!answers[key]) answers[key] = [];
+                    answers[key].push(value);
+                } else {
+                    answers[key] = value;
+                }
+            }
+            
+            // Save assessment results
+            const assessmentResults = {
+                id: Date.now().toString(),
+                answers: answers,
+                completedAt: new Date().toISOString(),
+                score: calculateScore(answers)
+            };
+            
+            localStorage.setItem('assessment_results', JSON.stringify(assessmentResults));
+            
+            // Redirect to results page
+            window.location.href = 'hasil-kuesioner.html';
+        });
+
+        function calculateScore(answers) {
+            // Simple scoring algorithm
+            let score = 50; // Base score
+            
+            // Mood scoring
+            const moodScores = {
+                'never': 20,
+                'rarely': 15,
+                'sometimes': 10,
+                'often': 5
+            };
+            
+            if (answers.mood_sad) {
+                score += moodScores[answers.mood_sad] || 0;
+            }
+            
+            // Energy scoring
+            const energyScores = {
+                'high': 15,
+                'normal': 10,
+                'low': 5,
+                'very_low': 0
+            };
+            
+            if (answers.energy) {
+                score += energyScores[answers.energy] || 0;
+            }
+            
+            // Sleep scoring
+            const sleepScores = {
+                'excellent': 15,
+                'good': 10,
+                'fair': 5,
+                'poor': 0
+            };
+            
+            if (answers.sleep_quality) {
+                score += sleepScores[answers.sleep_quality] || 0;
+            }
+            
+            // Anxiety scoring (reverse - higher number = more anxiety)
+            if (answers.anxiety) {
+                score -= (parseInt(answers.anxiety) - 1) * 5;
+            }
+            
+            return Math.max(0, Math.min(100, score));
+        }
+
+        // Initialize
+        document.getElementById('next-btn').addEventListener('click', nextStep);
+        document.getElementById('prev-btn').addEventListener('click', prevStep);
+        showStep(currentStep);
+    </script>
+</body>
+</html>

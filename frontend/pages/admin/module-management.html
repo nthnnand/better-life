@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Modul - BetterLife Admin</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-brand">
+                <i class="fas fa-heart"></i>
+                <span>BetterLife Admin</span>
+            </div>
+            <div class="admin-user-menu">
+                <span class="user-name">Admin</span>
+                <div class="user-dropdown">
+                    <a href="../index.html" class="dropdown-item">
+                        <i class="fas fa-home"></i> Website
+                    </a>
+                    <a href="../auth/login.html" class="dropdown-item logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="module-management.html" class="nav-item active">
+                    <i class="fas fa-book"></i>
+                    <span>Modul CBT</span>
+                </a>
+                <a href="video-management.html" class="nav-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                <a href="podcast-management.html" class="nav-item">
+                    <i class="fas fa-podcast"></i>
+                    <span>Podcast</span>
+                </a>
+                <a href="user-management.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="page-header">
+                <h1>Manajemen Modul CBT</h1>
+                <button class="btn btn-primary" onclick="showAddModuleModal()">
+                    <i class="fas fa-plus"></i> Buat Modul Baru
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Daftar Modul</h3>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Cari modul..." id="searchModule">
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Modul</th>
+                                <th>Kategori</th>
+                                <th>Level</th>
+                                <th>Durasi</th>
+                                <th>Lessons</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="moduleTable">
+                            <!-- Module data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Module Modal -->
+    <div id="addModuleModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Buat Modul CBT Baru</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="moduleForm" class="form-grid">
+                    <div class="form-group">
+                        <label>Nama Modul *</label>
+                        <input type="text" id="moduleName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori *</label>
+                        <select id="moduleCategory" required>
+                            <option value="cbt-basic">CBT Dasar</option>
+                            <option value="cbt-advanced">CBT Lanjutan</option>
+                            <option value="anxiety">Mengatasi Kecemasan</option>
+                            <option value="depression">Mengatasi Depresi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Level Kesulitan</label>
+                        <select id="moduleLevel">
+                            <option value="beginner">Pemula</option>
+                            <option value="intermediate">Menengah</option>
+                            <option value="advanced">Lanjutan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estimasi Durasi (menit)</label>
+                        <input type="number" id="moduleDuration" min="1">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Deskripsi Modul</label>
+                        <textarea id="moduleDescription" rows="3" placeholder="Deskripsi singkat tentang modul"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Tujuan Pembelajaran</label>
+                        <div id="learningObjectives">
+                            <div class="objective-item">
+                                <input type="text" class="objective-input" placeholder="Tujuan pembelajaran...">
+                                <button type="button" class="btn-icon remove" onclick="removeObjective(this)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline" onclick="addObjective()">
+                            <i class="fas fa-plus"></i> Tambah Tujuan
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="saveModule()">
+                    <i class="fas fa-save"></i> Simpan Modul
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample module data
+        let modules = JSON.parse(localStorage.getItem('betterlife_modules') || '[]');
+
+        function displayModules() {
+            const table = document.getElementById('moduleTable');
+            table.innerHTML = modules.map(module => `
+                <tr>
+                    <td>
+                        <strong>${module.name}</strong>
+                        <div class="text-muted">${module.description}</div>
+                    </td>
+                    <td><span class="badge">${module.category}</span></td>
+                    <td><span class="level-badge ${module.level}">${module.level}</span></td>
+                    <td>${module.duration} menit</td>
+                    <td>${module.lessons ? module.lessons.length : 0}</td>
+                    <td><span class="status published">Published</span></td>
+                    <td>
+                        <button class="btn-icon edit" onclick="editModule('${module.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-icon delete" onclick="deleteModule('${module.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function showAddModuleModal() {
+            document.getElementById('addModuleModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('addModuleModal').style.display = 'none';
+        }
+
+        function addObjective() {
+            const container = document.getElementById('learningObjectives');
+            const objectiveItem = document.createElement('div');
+            objectiveItem.className = 'objective-item';
+            objectiveItem.innerHTML = `
+                <input type="text" class="objective-input" placeholder="Tujuan pembelajaran...">
+                <button type="button" class="btn-icon remove" onclick="removeObjective(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(objectiveItem);
+        }
+
+        function removeObjective(button) {
+            if (document.querySelectorAll('.objective-item').length > 1) {
+                button.parentElement.remove();
+            }
+        }
+
+        function saveModule() {
+            const objectives = Array.from(document.querySelectorAll('.objective-input'))
+                .map(input => input.value)
+                .filter(value => value.trim() !== '');
+
+            const moduleData = {
+                id: Date.now().toString(),
+                name: document.getElementById('moduleName').value,
+                category: document.getElementById('moduleCategory').value,
+                level: document.getElementById('moduleLevel').value,
+                duration: parseInt(document.getElementById('moduleDuration').value) || 0,
+                description: document.getElementById('moduleDescription').value,
+                objectives: objectives,
+                createdAt: new Date().toISOString(),
+                status: 'published'
+            };
+
+            modules.push(moduleData);
+            localStorage.setItem('betterlife_modules', JSON.stringify(modules));
+            
+            displayModules();
+            closeModal();
+            alert('Modul berhasil ditambahkan!');
+        }
+
+        function deleteModule(moduleId) {
+            if (confirm('Apakah Anda yakin ingin menghapus modul ini?')) {
+                modules = modules.filter(module => module.id !== moduleId);
+                localStorage.setItem('betterlife_modules', JSON.stringify(modules));
+                displayModules();
+                alert('Modul berhasil dihapus!');
+            }
+        }
+
+        // Search functionality
+        document.getElementById('searchModule').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredModules = modules.filter(module => 
+                module.name.toLowerCase().includes(searchTerm) ||
+                module.description.toLowerCase().includes(searchTerm)
+            );
+            
+            const table = document.getElementById('moduleTable');
+            table.innerHTML = filteredModules.map(module => `
+                <tr>
+                    <td>
+                        <strong>${module.name}</strong>
+                        <div class="text-muted">${module.description}</div>
+                    </td>
+                    <td><span class="badge">${module.category}</span></td>
+                    <td><span class="level-badge ${module.level}">${module.level}</span></td>
+                    <td>${module.duration} menit</td>
+                    <td>${module.lessons ? module.lessons.length : 0}</td>
+                    <td><span class="status published">Published</span></td>
+                    <td>
+                        <button class="btn-icon edit" onclick="editModule('${module.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-icon delete" onclick="deleteModule('${module.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        });
+
+        // Initial display
+        displayModules();
+
+        // Add CSS for level badges
+        const style = document.createElement('style');
+        style.textContent = `
+            .level-badge {
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 0.8rem;
+                font-weight: 500;
+            }
+            .level-badge.beginner {
+                background: var(--light-blue);
+                color: var(--turquoise);
+            }
+            .level-badge.intermediate {
+                background: var(--warning);
+                color: var(--black);
+            }
+            .level-badge.advanced {
+                background: var(--error);
+                color: var(--white);
+            }
+            .text-muted {
+                color: var(--dark-gray);
+                font-size: 0.9rem;
+            }
+            .objective-item {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+            .objective-input {
+                flex: 1;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesi Meditasi - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="meditation-session">
+            <div class="session-header">
+                <h1 id="sessionTitle">Pernapasan Dalam</h1>
+                <div class="session-timer">
+                    <div class="timer-circle">
+                        <div class="timer-progress">
+                            <svg width="200" height="200" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="85" stroke="var(--light-gray)" stroke-width="10" fill="none"></circle>
+                                <circle cx="100" cy="100" r="85" stroke="var(--turquoise)" stroke-width="10" fill="none" 
+                                        stroke-linecap="round" transform="rotate(-90 100 100)" 
+                                        stroke-dasharray="534.07" stroke-dashoffset="0" id="timer-circle">
+                                </circle>
+                            </svg>
+                        </div>
+                        <div class="timer-display">
+                            <span id="timer">05:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-content">
+                <div class="breathing-animation">
+                    <div class="breathing-circle" id="breathingCircle"></div>
+                    <div class="breathing-instruction" id="breathingInstruction">
+                        Tarik napas...
+                    </div>
+                </div>
+
+                <div class="session-instructions">
+                    <h3>Instruksi Meditasi</h3>
+                    <ol>
+                        <li>Duduk atau berbaring di tempat yang nyaman</li>
+                        <li>Tutup mata Anda dan fokus pada pernapasan</li>
+                        <li>Tarik napas dalam melalui hidung (4 detik)</li>
+                        <li>Tahan napas (4 detik)</li>
+                        <li>Hembuskan perlahan melalui mulut (6 detik)</li>
+                        <li>Ulangi selama sesi berlangsung</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="session-controls">
+                <button class="btn btn-secondary" id="pauseBtn" onclick="togglePause()">
+                    <i class="fas fa-pause"></i> Jeda
+                </button>
+                <button class="btn btn-primary" id="completeBtn" onclick="completeSession()">
+                    <i class="fas fa-check"></i> Selesai
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .meditation-session {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .session-header h1 {
+            color: var(--black);
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+        }
+
+        .session-timer {
+            margin-bottom: 40px;
+        }
+
+        .timer-circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+
+        .timer-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--turquoise);
+        }
+
+        .session-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .breathing-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            background: var(--turquoise);
+            border-radius: 50%;
+            animation: breathe 8s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { 
+                transform: scale(0.8); 
+                opacity: 0.7; 
+            }
+            50% { 
+                transform: scale(1.2); 
+                opacity: 1; 
+            }
+        }
+
+        .breathing-instruction {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--turquoise);
+            min-height: 40px;
+        }
+
+        .session-instructions {
+            text-align: left;
+        }
+
+        .session-instructions h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .session-instructions ol {
+            color: var(--dark-gray);
+            line-height: 1.8;
+        }
+
+        .session-instructions li {
+            margin-bottom: 10px;
+        }
+
+        .session-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .session-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .session-instructions {
+                text-align: center;
+            }
+            
+            .session-controls {
+                flex-direction: column;
+            }
+            
+            .session-controls .btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+        let timer;
+        let timeLeft = 300; // 5 minutes in seconds
+        let isPaused = false;
+        let breathingPhase = 'inhale'; // inhale, hold, exhale
+
+        function startTimer() {
+            timer = setInterval(() => {
+                if (!isPaused) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    updateBreathingAnimation();
+                    
+                    if (timeLeft <= 0) {
+                        completeSession();
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update circle progress
+            const totalTime = 300;
+            const progress = ((totalTime - timeLeft) / totalTime) * 534.07;
+            document.getElementById('timer-circle').style.strokeDashoffset = 534.07 - progress;
+        }
+
+        function updateBreathingAnimation() {
+            const cycleTime = 14; // 4s inhale + 4s hold + 6s exhale = 14s
+            const cycleProgress = (300 - timeLeft) % cycleTime;
+            
+            let instruction = '';
+            if (cycleProgress < 4) {
+                instruction = 'Tarik napas...';
+                breathingPhase = 'inhale';
+            } else if (cycleProgress < 8) {
+                instruction = 'Tahan napas...';
+                breathingPhase = 'hold';
+            } else {
+                instruction = 'Hembuskan napas...';
+                breathingPhase = 'exhale';
+            }
+            
+            document.getElementById('breathingInstruction').textContent = instruction;
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            const pauseBtn = document.getElementById('pauseBtn');
+            
+            if (isPaused) {
+                pauseBtn.innerHTML = '<i class="fas fa-play"></i> Lanjutkan';
+                pauseBtn.classList.remove('btn-secondary');
+                pauseBtn.classList.add('btn-primary');
+            } else {
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Jeda';
+                pauseBtn.classList.remove('btn-primary');
+                pauseBtn.classList.add('btn-secondary');
+            }
+        }
+
+        function completeSession() {
+            clearInterval(timer);
+            alert('Sesi meditasi selesai! Anda telah menyelesaikan meditasi dengan baik.');
+            
+            // Save session to history
+            const sessionHistory = JSON.parse(localStorage.getItem('meditation_history') || '[]');
+            sessionHistory.push({
+                type: 'breathing',
+                duration: 300,
+                completedAt: new Date().toISOString()
+            });
+            localStorage.setItem('meditation_history', JSON.stringify(sessionHistory));
+            
+            // Redirect back to meditation page
+            setTimeout(() => {
+                window.location.href = 'meditasi.html';
+            }, 2000);
+        }
+
+        // Get session type from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionType = urlParams.get('type') || 'breathing';
+        
+        // Set session title based on type
+        const titles = {
+            'breathing': 'Pernapasan Dalam',
+            'mindfulness': 'Mindfulness Meditation',
+            'relaxation': 'Relaksasi Tubuh',
+            'loving-kindness': 'Meditasi Cinta Kasih'
+        };
+        
+        document.getElementById('sessionTitle').textContent = titles[sessionType] || 'Meditasi';
+
+        // Start the session
+        startTimer();
+    </script>
+</body>
+</html>

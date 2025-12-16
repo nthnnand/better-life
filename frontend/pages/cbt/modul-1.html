@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 1: Pengenalan CBT - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="module-container">
+            <div class="module-sidebar">
+                <div class="module-progress">
+                    <h4>Progress Modul</h4>
+                    <div class="progress-circle">
+                        <div class="circle" data-progress="20">
+                            <span>20%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module-nav">
+                    <h4>Daftar Pelajaran</h4>
+                    <ul class="lesson-list">
+                        <li class="lesson completed">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Pengenalan CBT</span>
+                        </li>
+                        <li class="lesson active">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Mengenal Pikiran Otomatis</span>
+                        </li>
+                        <li class="lesson">
+                            <i class="far fa-circle"></i>
+                            <span>Identifikasi Distorsi Kognitif</span>
+                        </li>
+                        <li class="lesson">
+                            <i class="far fa-circle"></i>
+                            <span>Teknik Restrukturisasi</span>
+                        </li>
+                        <li class="lesson">
+                            <i class="far fa-circle"></i>
+                            <span>Praktik Harian</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-content">
+                <div class="lesson-header">
+                    <h2>Mengenal Pikiran Otomatis</h2>
+                    <div class="lesson-meta">
+                        <span><i class="fas fa-clock"></i> 15 menit</span>
+                        <span><i class="fas fa-book"></i> Teori & Praktik</span>
+                    </div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- Video Pembelajaran -->
+                    <div class="lesson-video">
+                        <div class="video-wrapper">
+                            <div class="video-placeholder">
+                                <i class="fas fa-play-circle"></i>
+                                <p>Video Pembelajaran</p>
+                                <span>Teknik Mengidentifikasi Pikiran Otomatis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teori -->
+                    <div class="theory-section">
+                        <h3>Apa itu Pikiran Otomatis?</h3>
+                        <p>Pikiran otomatis adalah pikiran yang muncul secara spontan dalam respons terhadap suatu situasi. Pikiran ini sering kali tidak disadari tetapi mempengaruhi perasaan dan perilaku kita.</p>
+                        
+                        <div class="example-box">
+                            <h4>Contoh Pikiran Otomatis:</h4>
+                            <div class="example-item">
+                                <strong>Situasi:</strong> Presentasi di depan rekan kerja
+                            </div>
+                            <div class="example-item">
+                                <strong>Pikiran Otomatis:</strong> "Saya pasti akan gagal"
+                            </div>
+                            <div class="example-item">
+                                <strong>Perasaan:</strong> Cemas, gugup
+                            </div>
+                            <div class="example-item">
+                                <strong>Perilaku:</strong> Menghindari presentasi
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latihan Interaktif -->
+                    <div class="exercise-section">
+                        <h3>Latihan: Identifikasi Pikiran Otomatis</h3>
+                        <div class="interactive-exercise">
+                            <div class="scenario">
+                                <p><strong>Scenario:</strong> Anda mendapatkan nilai ujian yang lebih rendah dari yang diharapkan.</p>
+                            </div>
+                            
+                            <div class="exercise-question">
+                                <p>Apa pikiran otomatis yang mungkin muncul?</p>
+                                <div class="options">
+                                    <label class="option">
+                                        <input type="radio" name="thought" value="1">
+                                        <span>"Saya bodoh dan tidak akan pernah berhasil"</span>
+                                    </label>
+                                    <label class="option">
+                                        <input type="radio" name="thought" value="2">
+                                        <span>"Ini hanya satu ujian, saya bisa memperbaiki next time"</span>
+                                    </label>
+                                    <label class="option">
+                                        <input type="radio" name="thought" value="3">
+                                        <span>"Guru tidak suka dengan saya"</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary check-answer" onclick="checkAnswer()">
+                                Periksa Jawaban
+                            </button>
+                            
+                            <div class="answer-feedback" id="feedback" style="display: none;">
+                                <div class="feedback correct">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <strong>Benar!</strong> Pikiran "Saya bodoh dan tidak akan pernah berhasil" adalah contoh pikiran otomatis negatif yang mengandung distorsi kognitif.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download Materi -->
+                    <div class="download-section">
+                        <h3>Materi Tambahan</h3>
+                        <div class="download-cards">
+                            <div class="download-card">
+                                <i class="fas fa-file-pdf"></i>
+                                <div>
+                                    <h5>Worksheet Pikiran Otomatis</h5>
+                                    <p>PDF - 1.2 MB</p>
+                                </div>
+                                <button class="btn-download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="download-card">
+                                <i class="fas fa-file-audio"></i>
+                                <div>
+                                    <h5>Audio Guided Reflection</h5>
+                                    <p>MP3 - 8.5 MB</p>
+                                </div>
+                                <button class="btn-download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="btn btn-secondary prev-lesson">
+                        <i class="fas fa-arrow-left"></i> Sebelumnya
+                    </button>
+                    <button class="btn btn-primary next-lesson" onclick="completeLesson()">
+                        Selanjutnya <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .module-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            margin: 100px 0 50px;
+        }
+
+        .module-sidebar {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .module-progress {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .module-progress h4 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .progress-circle {
+            display: flex;
+            justify-content: center;
+        }
+
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--turquoise) 0% 20%, var(--light-gray) 20% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .circle::before {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: var(--white);
+            border-radius: 50%;
+        }
+
+        .circle span {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: var(--turquoise);
+            font-size: 1.2rem;
+        }
+
+        .lesson-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lesson {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lesson:hover {
+            background: var(--light-blue);
+        }
+
+        .lesson.active {
+            background: var(--turquoise);
+            color: var(--white);
+        }
+
+        .lesson.completed {
+            color: var(--success);
+        }
+
+        .lesson.active .fas,
+        .lesson.active .far {
+            color: var(--white);
+        }
+
+        .lesson.completed .fas {
+            color: var(--success);
+        }
+
+        .module-content {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .lesson-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .lesson-header h2 {
+            color: var(--black);
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+        }
+
+        .lesson-meta {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            color: var(--dark-gray);
+        }
+
+        .lesson-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lesson-body {
+            margin-bottom: 40px;
+        }
+
+        .lesson-video {
+            margin-bottom: 40px;
+        }
+
+        .video-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: var(--light-gray);
+        }
+
+        .video-placeholder {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+
+        .video-placeholder i {
+            font-size: 4rem;
+            color: var(--turquoise);
+            margin-bottom: 15px;
+        }
+
+        .video-placeholder p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .theory-section {
+            margin-bottom: 40px;
+        }
+
+        .theory-section h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .theory-section p {
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .example-box {
+            background: var(--light-blue);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--turquoise);
+            margin-top: 25px;
+        }
+
+        .example-box h4 {
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .example-item {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            background: var(--white);
+            border-radius: 8px;
+            border-left: 3px solid var(--turquoise);
+        }
+
+        .exercise-section {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .exercise-section h3 {
+            color: var(--black);
+            margin-bottom: 25px;
+        }
+
+        .interactive-exercise {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .scenario {
+            background: var(--light-blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--turquoise);
+        }
+
+        .exercise-question {
+            margin-bottom: 25px;
+        }
+
+        .exercise-question p {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: var(--turquoise);
+            background: var(--light-blue);
+        }
+
+        .option input:checked + span {
+            color: var(--turquoise);
+            font-weight: 600;
+        }
+
+        .answer-feedback {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feedback {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feedback.correct {
+            background: rgba(29, 209, 161, 0.1);
+            border-left: 4px solid var(--success);
+            color: #0a7c5d;
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--error);
+            color: #c44545;
+        }
+
+        .feedback i {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .download-section {
+            margin-top: 40px;
+        }
+
+        .download-section h3 {
+            color: var(--black);
+            margin-bottom: 25px;
+        }
+
+        .download-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .download-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .download-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .download-card i {
+            font-size: 2rem;
+            color: var(--turquoise);
+        }
+
+        .download-card h5 {
+            color: var(--black);
+            margin-bottom: 5px;
+        }
+
+        .download-card p {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .btn-download {
+            margin-left: auto;
+            width: 45px;
+            height: 45px;
+            background: var(--turquoise);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: var(--light-turquoise);
+            color: var(--black);
+            transform: scale(1.1);
+        }
+
+        .lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        @media (max-width: 968px) {
+            .module-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .module-sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .module-content {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .module-content {
+                padding: 25px;
+            }
+            
+            .lesson-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .download-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .lesson-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .lesson-navigation .btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+        function checkAnswer() {
+            const selectedOption = document.querySelector('.interactive-exercise input:checked');
+            const feedback = document.getElementById('feedback');
+            
+            if (!selectedOption) {
+                alert('Pilih jawaban terlebih dahulu!');
+                return;
+            }
+
+            const isCorrect = selectedOption.value === '1';
+            
+            feedback.innerHTML = isCorrect ? 
+                `<div class="feedback correct">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Benar!</strong> Pikiran "Saya bodoh dan tidak akan pernah berhasil" adalah contoh pikiran otomatis negatif.
+                    </div>
+                </div>` :
+                `<div class="feedback incorrect">
+                    <i class="fas fa-times-circle"></i>
+                    <div>
+                        <strong>Perlu diperhatikan:</strong> Itu bukan contoh terbaik dari pikiran otomatis negatif.
+                    </div>
+                </div>`;
+
+            feedback.style.display = 'block';
+        }
+
+        function completeLesson() {
+            // Update progress
+            const circle = document.querySelector('.circle');
+            const progress = 40; // Next progress
+            circle.style.background = `conic-gradient(var(--turquoise) 0% ${progress}%, var(--light-gray) ${progress}% 100%)`;
+            circle.querySelector('span').textContent = `${progress}%`;
+            
+            // Mark lesson as completed
+            const currentLesson = document.querySelector('.lesson.active');
+            currentLesson.classList.remove('active');
+            currentLesson.classList.add('completed');
+            currentLesson.innerHTML = '<i class="fas fa-check-circle"></i><span>Mengenal Pikiran Otomatis</span>';
+            
+            // Activate next lesson
+            const nextLesson = currentLesson.nextElementSibling;
+            if (nextLesson) {
+                nextLesson.classList.add('active');
+            }
+            
+            alert('Pelajaran berhasil diselesaikan!');
+        }
+    </script>
+</body>
+</html>

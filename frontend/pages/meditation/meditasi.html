@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditasi - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Sesi Meditasi</h1>
+            <p>Temukan kedamaian dan ketenangan pikiran melalui meditasi</p>
+        </div>
+
+        <div class="meditation-grid">
+            <div class="meditation-card">
+                <div class="meditation-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <h3>Pernapasan Dalam</h3>
+                <p>Teknik dasar untuk menenangkan sistem saraf</p>
+                <div class="meditation-info">
+                    <span><i class="fas fa-clock"></i> 5 menit</span>
+                    <span><i class="fas fa-signal"></i> Pemula</span>
+                </div>
+                <button class="btn btn-primary" onclick="startMeditation('breathing')">
+                    Mulai Meditasi
+                </button>
+            </div>
+
+            <div class="meditation-card">
+                <div class="meditation-icon">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <h3>Mindfulness</h3>
+                <p>Hadir sepenuhnya pada momen saat ini</p>
+                <div class="meditation-info">
+                    <span><i class="fas fa-clock"></i> 10 menit</span>
+                    <span><i class="fas fa-signal"></i> Menengah</span>
+                </div>
+                <button class="btn btn-primary" onclick="startMeditation('mindfulness')">
+                    Mulai Meditasi
+                </button>
+            </div>
+
+            <div class="meditation-card">
+                <div class="meditation-icon">
+                    <i class="fas fa-bed"></i>
+                </div>
+                <h3>Relaksasi Tubuh</h3>
+                <p>Melepas ketegangan dari kepala hingga kaki</p>
+                <div class="meditation-info">
+                    <span><i class="fas fa-clock"></i> 15 menit</span>
+                    <span><i class="fas fa-signal"></i> Semua Level</span>
+                </div>
+                <button class="btn btn-primary" onclick="startMeditation('relaxation')">
+                    Mulai Meditasi
+                </button>
+            </div>
+
+            <div class="meditation-card">
+                <div class="meditation-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Cinta Kasih</h3>
+                <p>Mengembangkan rasa kasih sayang kepada diri dan orang lain</p>
+                <div class="meditation-info">
+                    <span><i class="fas fa-clock"></i> 12 menit</span>
+                    <span><i class="fas fa-signal"></i> Menengah</span>
+                </div>
+                <button class="btn btn-primary" onclick="startMeditation('loving-kindness')">
+                    Mulai Meditasi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .meditation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .meditation-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .meditation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .meditation-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--turquoise);
+            font-size: 2rem;
+        }
+
+        .meditation-card h3 {
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .meditation-card p {
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .meditation-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .meditation-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+
+    <script>
+        function startMeditation(type) {
+            alert(`Memulai meditasi: ${type}`);
+            // Redirect to meditation session page
+            window.location.href = `sesi-meditasi.html?type=${type}`;
+        }
+    </script>
+</body>
+</html>

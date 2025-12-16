@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress - BetterLife</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+            <div class="nav-buttons">
+                <span id="userName">User</span>
+                <button class="btn btn-outline" onclick="logout()">Keluar</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="progress-header">
+            <h1>Progress Belajar Anda</h1>
+            <p>Lacak perkembangan Anda dalam menyelesaikan modul dan aktivitas</p>
+        </div>
+
+        <!-- Statistics Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalModules">0</h3>
+                    <p>Total Modul</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #d4edda; color: #28a745;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="completedModules">0</h3>
+                    <p>Modul Selesai</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #fff3cd; color: #ffc107;">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="inProgressModules">0</h3>
+                    <p>Sedang Berlangsung</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #cce5ff; color: #007bff;">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalHours">0</h3>
+                    <p>Jam Belajar</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module Progress List -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Detail Modul</h3>
+                <div class="filter-buttons">
+                    <button class="btn btn-outline" onclick="filterModules('all')" id="filterAll">Semua</button>
+                    <button class="btn btn-outline" onclick="filterModules('completed')" id="filterCompleted">Selesai</button>
+                    <button class="btn btn-outline" onclick="filterModules('inProgress')" id="filterInProgress">Berlangsung</button>
+                    <button class="btn btn-outline" onclick="filterModules('notStarted')" id="filterNotStarted">Belum Dimulai</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="moduleProgressList"></div>
+            </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Aktivitas Terakhir</h3>
+            </div>
+            <div class="card-body">
+                <div class="timeline" id="activityTimeline">
+                    <!-- Timeline items akan dimuat di sini -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .progress-header {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        .progress-header h1 {
+            font-size: 2.2rem;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .progress-header p {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons .btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .module-progress-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .module-progress-item:hover {
+            border-color: var(--primary);
+            background: rgba(22,135,128,0.02);
+        }
+
+        .module-progress-info h4 {
+            margin: 0 0 8px 0;
+            color: var(--black);
+        }
+
+        .module-progress-info p {
+            margin: 0 0 12px 0;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress {
+            flex: 1;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #20d4b8);
+            transition: width 0.3s ease;
+        }
+
+        .progress-percent {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 40px;
+            text-align: right;
+        }
+
+        .module-status {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.completed {
+            background: #d4edda;
+            color: #28a745;
+        }
+
+        .status-badge.inProgress {
+            background: #fff3cd;
+            color: #ffc107;
+        }
+
+        .status-badge.notStarted {
+            background: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        .module-action {
+            display: flex;
+            gap: 8px;
+        }
+
+        .module-action .btn {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 40px;
+            width: 2px;
+            height: calc(100% + 24px);
+            background: var(--light-gray);
+        }
+
+        .timeline-dot {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content h5 {
+            margin: 0 0 4px 0;
+            color: var(--black);
+        }
+
+        .timeline-content p {
+            margin: 0;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .timeline-date {
+            display: block;
+            color: var(--dark-gray);
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            color: var(--light-gray);
+            margin-bottom: 16px;
+        }
+
+        .empty-state p {
+            color: var(--dark-gray);
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .progress-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .filter-buttons {
+                gap: 8px;
+            }
+
+            .filter-buttons .btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .module-progress-item {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .module-status {
+                text-align: left;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+    </style>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/module-system.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        let currentFilter = 'all';
+
+        // Load progress statistics
+        function loadProgressStats() {
+            const stats = moduleSystem.getProgressStats();
+            
+            document.getElementById('totalModules').textContent = stats.total;
+            document.getElementById('completedModules').textContent = stats.completed;
+            document.getElementById('inProgressModules').textContent = stats.inProgress;
+            document.getElementById('totalHours').textContent = stats.totalHours;
+        }
+
+        // Load module progress list
+        function loadModuleProgressList() {
+            const modules = moduleSystem.getAllModules();
+            const list = document.getElementById('moduleProgressList');
+
+            if (modules.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <p>Belum ada modul yang dimulai</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const filtered = modules.filter(module => {
+                if (currentFilter === 'all') return true;
+                return module.status === currentFilter;
+            });
+
+            if (filtered.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>Tidak ada modul dengan status ini</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = filtered.map(module => `
+                <div class="module-progress-item">
+                    <div class="module-progress-info">
+                        <h4>${module.name}</h4>
+                        <p>${module.description}</p>
+                        <div class="progress-bar-container">
+                            <div class="progress">
+                                <div class="progress-bar" style="width: ${module.progress}%"></div>
+                            </div>
+                            <span class="progress-percent">${module.progress}%</span>
+                        </div>
+                    </div>
+                    <div class="module-status">
+                        <span class="status-badge ${module.status}">${formatStatus(module.status)}</span>
+                        <div class="module-action">
+                            <button class="btn btn-primary" onclick="continueModule('${module.id}')">
+                                <i class="fas fa-play"></i> Lanjut
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load activity timeline
+        function loadActivityTimeline() {
+            const timeline = document.getElementById('activityTimeline');
+            const activities = [
+                { icon: 'check-circle', title: 'Modul Diselesaikan', description: 'Anda menyelesaikan modul "Pengenalan CBT"', time: new Date() },
+                { icon: 'play-circle', title: 'Modul Dimulai', description: 'Anda memulai modul "Pola Pikir Positif"', time: new Date(Date.now() - 86400000) },
+                { icon: 'spa', title: 'Sesi Meditasi', description: 'Anda menyelesaikan sesi meditasi 15 menit', time: new Date(Date.now() - 172800000) }
+            ];
+
+            timeline.innerHTML = activities.map(activity => `
+                <div class="timeline-item">
+                    <div class="timeline-dot">
+                        <i class="fas fa-${activity.icon}"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h5>${activity.title}</h5>
+                        <p>${activity.description}</p>
+                        <span class="timeline-date">${Utils.timeAgo(activity.time)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format status text
+        function formatStatus(status) {
+            const statusMap = {
+                'completed': 'Selesai',
+                'inProgress': 'Berlangsung',
+                'notStarted': 'Belum Dimulai'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Filter modules
+        function filterModules(filter) {
+            currentFilter = filter;
+
+            // Update button styles
+            document.querySelectorAll('.filter-buttons .btn').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            });
+
+            const filterMap = {
+                'all': 'filterAll',
+                'completed': 'filterCompleted',
+                'inProgress': 'filterInProgress',
+                'notStarted': 'filterNotStarted'
+            };
+
+            if (filterMap[filter]) {
+                document.getElementById(filterMap[filter]).classList.remove('btn-outline');
+                document.getElementById(filterMap[filter]).classList.add('btn-primary');
+            }
+
+            loadModuleProgressList();
+        }
+
+        // Continue module
+        function continueModule(moduleId) {
+            window.location.href = '../cbt/modul-1.html';
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgressStats();
+            loadModuleProgressList();
+            loadActivityTimeline();
+
+            // Set default active filter
+            document.getElementById('filterAll').classList.add('btn-primary');
+            document.getElementById('filterAll').classList.remove('btn-outline');
+        });
+    </script>
+</body>
+</html>

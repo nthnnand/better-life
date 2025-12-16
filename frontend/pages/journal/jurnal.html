@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Harian - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="journal-container">
+            <div class="journal-sidebar">
+                <div class="journal-stats">
+                    <h3>Statistik Jurnal</h3>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalEntries">0</span>
+                        <span class="stat-label">Total Entri</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="streakDays">0</span>
+                        <span class="stat-label">Hari Berturut-turut</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="thisMonth">0</span>
+                        <span class="stat-label">Bulan Ini</span>
+                    </div>
+                </div>
+
+                <div class="prompt-section">
+                    <h3>Prompt Hari Ini</h3>
+                    <div class="prompt-card">
+                        <p>"Apa 3 hal yang Anda syukuri hari ini?"</p>
+                    </div>
+                    <div class="prompt-card">
+                        <p>"Bagaimana perasaan Anda saat ini? Jelaskan secara detail."</p>
+                    </div>
+                    <div class="prompt-card">
+                        <p>"Apa tantangan yang Anda hadapi dan bagaimana mengatasinya?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journal-main">
+                <div class="journal-editor">
+                    <div class="editor-header">
+                        <input type="text" id="journalTitle" placeholder="Judul jurnal..." class="title-input">
+                        <div class="date-display" id="currentDate"></div>
+                    </div>
+
+                    <div class="mood-selector">
+                        <span>Suasana Hati:</span>
+                        <div class="mood-options">
+                            <label class="mood-option">
+                                <input type="radio" name="mood" value="very_happy">
+                                <span>😊</span>
+                            </label>
+                            <label class="mood-option">
+                                <input type="radio" name="mood" value="happy">
+                                <span>🙂</span>
+                            </label>
+                            <label class="mood-option">
+                                <input type="radio" name="mood" value="neutral">
+                                <span>😐</span>
+                            </label>
+                            <label class="mood-option">
+                                <input type="radio" name="mood" value="sad">
+                                <span>😔</span>
+                            </label>
+                            <label class="mood-option">
+                                <input type="radio" name="mood" value="very_sad">
+                                <span>😢</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <textarea id="journalContent" placeholder="Tuliskan perasaan dan pikiran Anda hari ini..." rows="15"></textarea>
+
+                    <div class="editor-actions">
+                        <button class="btn btn-secondary" onclick="saveDraft()">
+                            <i class="fas fa-save"></i> Simpan Draft
+                        </button>
+                        <button class="btn btn-primary" onclick="publishJournal()">
+                            <i class="fas fa-paper-plane"></i> Publikasikan
+                        </button>
+                    </div>
+                </div>
+
+                <div class="journal-entries">
+                    <h3>Entri Terbaru</h3>
+                    <div class="entries-list" id="entriesList">
+                        <!-- Entries will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .journal-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            margin: 100px 0 50px;
+        }
+
+        .journal-sidebar {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .journal-stats {
+            margin-bottom: 40px;
+        }
+
+        .journal-stats h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: var(--light-blue);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--turquoise);
+        }
+
+        .stat-label {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .prompt-section h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .prompt-card {
+            background: var(--light-gray);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--turquoise);
+        }
+
+        .prompt-card p {
+            color: var(--dark-gray);
+            margin: 0;
+            font-style: italic;
+        }
+
+        .journal-main {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .journal-editor {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .title-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .date-display {
+            color: var(--dark-gray);
+            font-weight: 500;
+            margin-left: 20px;
+        }
+
+        .mood-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mood-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mood-option {
+            cursor: pointer;
+        }
+
+        .mood-option input {
+            display: none;
+        }
+
+        .mood-option span {
+            font-size: 1.5rem;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .mood-option input:checked + span {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        #journalContent {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .journal-entries {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .journal-entries h3 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .entries-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .journal-entry {
+            padding: 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .journal-entry:hover {
+            border-color: var(--turquoise);
+            transform: translateY(-2px);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .entry-header h4 {
+            color: var(--black);
+            margin: 0;
+        }
+
+        .entry-date {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .entry-mood {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .entry-preview {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .btn-read-more {
+            background: none;
+            border: none;
+            color: var(--turquoise);
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        @media (max-width: 968px) {
+            .journal-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .journal-sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .journal-main {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .editor-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .date-display {
+                margin-left: 0;
+            }
+            
+            .editor-actions {
+                flex-direction: column;
+            }
+            
+            .editor-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script>
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('id-ID', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Load journal entries
+        function loadJournalEntries() {
+            const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
+            const entriesList = document.getElementById('entriesList');
+            
+            document.getElementById('totalEntries').textContent = entries.length;
+            document.getElementById('streakDays').textContent = calculateStreak(entries);
+            document.getElementById('thisMonth').textContent = entries.filter(entry => {
+                const entryDate = new Date(entry.date);
+                const now = new Date();
+                return entryDate.getMonth() === now.getMonth() && entryDate.getFullYear() === now.getFullYear();
+            }).length;
+
+            if (entries.length === 0) {
+                entriesList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-book"></i>
+                        <p>Belum ada entri jurnal</p>
+                        <small>Mulai menulis jurnal pertama Anda</small>
+                    </div>
+                `;
+            } else {
+                entriesList.innerHTML = entries.slice(0, 5).map(entry => `
+                    <div class="journal-entry">
+                        <div class="entry-header">
+                            <h4>${entry.title}</h4>
+                            <span class="entry-date">${new Date(entry.date).toLocaleDateString('id-ID')}</span>
+                        </div>
+                        <div class="entry-mood">${getMoodEmoji(entry.mood)}</div>
+                        <p class="entry-preview">${entry.content.substring(0, 100)}...</p>
+                        <button class="btn-read-more" onclick="viewEntry('${entry.id}')">
+                            Baca Selengkapnya
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function calculateStreak(entries) {
+            if (entries.length === 0) return 0;
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            let streak = 0;
+            let currentDate = today;
+            
+            // Sort entries by date descending
+            const sortedEntries = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            for (let i = 0; i < sortedEntries.length; i++) {
+                const entryDate = new Date(sortedEntries[i].date);
+                entryDate.setHours(0, 0, 0, 0);
+                
+                if (entryDate.getTime() === currentDate.getTime()) {
+                    streak++;
+                    currentDate.setDate(currentDate.getDate() - 1);
+                } else {
+                    break;
+                }
+            }
+            
+            return streak;
+        }
+
+        function getMoodEmoji(mood) {
+            const emojis = {
+                'very_happy': '😊',
+                'happy': '🙂',
+                'neutral': '😐',
+                'sad': '😔',
+                'very_sad': '😢'
+            };
+            return emojis[mood] || '😐';
+        }
+
+        function saveDraft() {
+            const title = document.getElementById('journalTitle').value;
+            const content = document.getElementById('journalContent').value;
+            const mood = document.querySelector('input[name="mood"]:checked')?.value;
+            
+            if (!title || !content || !mood) {
+                alert('Judul, konten, dan suasana hati tidak boleh kosong!');
+                return;
+            }
+            
+            const draft = { title, content, mood };
+            localStorage.setItem('journal_draft', JSON.stringify(draft));
+            alert('Draft berhasil disimpan!');
+        }
+
+        function publishJournal() {
+            const title = document.getElementById('journalTitle').value;
+            const content = document.getElementById('journalContent').value;
+            const mood = document.querySelector('input[name="mood"]:checked')?.value;
+            
+            if (!title || !content || !mood) {
+                alert('Harap lengkapi semua field!');
+                return;
+            }
+            
+            const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
+            const newEntry = {
+                id: Date.now().toString(),
+                title,
+                content,
+                mood,
+                date: new Date().toISOString()
+            };
+            
+            entries.unshift(newEntry);
+            localStorage.setItem('journal_entries', JSON.stringify(entries));
+            
+            // Clear form
+            document.getElementById('journalTitle').value = '';
+            document.getElementById('journalContent').value = '';
+            document.querySelectorAll('input[name="mood"]').forEach(input => input.checked = false);
+            
+            // Reload entries
+            loadJournalEntries();
+            
+            alert('Jurnal berhasil dipublikasikan!');
+        }
+
+        function viewEntry(entryId) {
+            // Redirect to entry detail page
+            window.location.href = `entri-jurnal.html?id=${entryId}`;
+        }
+
+        // Load draft if exists
+        window.addEventListener('load', function() {
+            const draft = localStorage.getItem('journal_draft');
+            if (draft) {
+                const { title, content, mood } = JSON.parse(draft);
+                document.getElementById('journalTitle').value = title;
+                document.getElementById('journalContent').value = content;
+                if (mood) {
+                    document.querySelector(`input[value="${mood}"]`).checked = true;
+                }
+            }
+            
+            loadJournalEntries();
+        });
+
+        // Add CSS for empty state
+        const style = document.createElement('style');
+        style.textContent = `
+            .empty-state {
+                text-align: center;
+                padding: 40px;
+                color: var(--dark-gray);
+            }
+            
+            .empty-state i {
+                font-size: 3rem;
+                color: var(--light-gray);
+                margin-bottom: 15px;
+            }
+            
+            .empty-state p {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

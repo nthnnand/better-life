@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Podcast - BetterLife Admin</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+    <!-- ======= HEADER ======= -->
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-brand">
+                <i class="fas fa-heart"></i>
+                <span>BetterLife Admin</span>
+            </div>
+
+            <div class="admin-user-menu">
+                <span class="user-name">Admin</span>
+                <div class="user-dropdown">
+                    <a href="../index.html" class="dropdown-item">
+                        <i class="fas fa-home"></i> Website
+                    </a>
+                    <a href="../auth/login.html" class="dropdown-item logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======= LAYOUT ======= -->
+    <div class="admin-layout">
+        <!-- ======= SIDEBAR ======= -->
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="module-management.html" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>Modul CBT</span>
+                </a>
+                <a href="video-management.html" class="nav-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                <a href="podcast-management.html" class="nav-item active">
+                    <i class="fas fa-podcast"></i>
+                    <span>Podcast</span>
+                </a>
+                <a href="user-management.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- ======= MAIN CONTENT ======= -->
+        <main class="admin-main">
+            <div class="page-header">
+                <h1>Manajemen Podcast</h1>
+                <button class="btn btn-primary" onclick="showAddPodcastModal()">
+                    <i class="fas fa-plus"></i> Tambah Podcast
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Daftar Podcast</h3>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Cari podcast..." id="searchPodcast">
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Series</th>
+                                <th>Durasi</th>
+                                <th>Speaker</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="podcastTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- =========== MODAL TAMBAH PODCAST =========== -->
+    <div id="addPodcastModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Tambah Podcast Baru</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="podcastForm" class="form-grid">
+                    <div class="form-group">
+                        <label>Judul Podcast *</label>
+                        <input type="text" id="podcastTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Series</label>
+                        <select id="podcastSeries">
+                            <option value="mental-health">Kesehatan Mental</option>
+                            <option value="mindfulness">Mindfulness</option>
+                            <option value="therapy">Terapi</option>
+                            <option value="stories">Cerita Inspiratif</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Speaker *</label>
+                        <input type="text" id="podcastSpeaker" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Durasi (menit) *</label>
+                        <input type="number" id="podcastDuration" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Deskripsi</label>
+                        <textarea id="podcastDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>File Audio *</label>
+                        <input type="file" id="podcastAudio" accept="audio/*" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="savePodcast()">
+                    <i class="fas fa-save"></i> Simpan Podcast
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== SCRIPT =============== -->
+    <script>
+        let podcasts = JSON.parse(localStorage.getItem("betterlife_podcasts") || "[]");
+
+        function displayPodcasts(list = podcasts) {
+            const table = document.getElementById("podcastTable");
+            table.innerHTML = list.map(p => `
+                <tr>
+                    <td><strong>${p.title}</strong><div class="text-muted">${p.description}</div></td>
+                    <td><span class="badge">${p.series}</span></td>
+                    <td>${p.duration} menit</td>
+                    <td>${p.speaker}</td>
+                    <td><span class="status published">Published</span></td>
+                    <td>
+                        <button class="btn-icon delete" onclick="deletePodcast('${p.id}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join("");
+        }
+
+        function showAddPodcastModal() {
+            document.getElementById("addPodcastModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("addPodcastModal").style.display = "none";
+        }
+
+        function savePodcast() {
+            const audioFile = document.getElementById("podcastAudio").files[0];
+            if (!audioFile) {
+                alert("File audio wajib diisi!");
+                return;
+            }
+
+            const podcast = {
+                id: Date.now().toString(),
+                title: document.getElementById("podcastTitle").value,
+                series: document.getElementById("podcastSeries").value,
+                speaker: document.getElementById("podcastSpeaker").value,
+                duration: document.getElementById("podcastDuration").value,
+                description: document.getElementById("podcastDescription").value,
+                createdAt: new Date().toISOString(),
+                status: "published"
+            };
+
+            podcasts.push(podcast);
+            localStorage.setItem("betterlife_podcasts", JSON.stringify(podcasts));
+
+            displayPodcasts();
+            closeModal();
+            alert("Podcast berhasil ditambahkan!");
+        }
+
+        function deletePodcast(id) {
+            if (!confirm("Hapus podcast ini?")) return;
+
+            podcasts = podcasts.filter(p => p.id !== id);
+            localStorage.setItem("betterlife_podcasts", JSON.stringify(podcasts));
+
+            displayPodcasts();
+        }
+
+        // Live Search
+        document.getElementById("searchPodcast").addEventListener("input", (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = podcasts.filter(p =>
+                p.title.toLowerCase().includes(keyword) ||
+                p.speaker.toLowerCase().includes(keyword)
+            );
+            displayPodcasts(filtered);
+        });
+
+        displayPodcasts();
+    </script>
+</body>
+</html>

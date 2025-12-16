@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - BetterLife</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+            <div class="nav-buttons">
+                <span id="userName">User</span>
+                <button class="btn btn-outline" onclick="logout()">Keluar</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="profile-container">
+            <!-- Sidebar Profile -->
+            <aside class="profile-sidebar">
+                <div class="profile-card">
+                    <div class="profile-avatar" id="profileAvatar">SA</div>
+                    <h2 id="profileName">Siti Aisyah</h2>
+                    <p id="profileEmail">siti@example.com</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-value">5</div>
+                            <div class="stat-label">Modul</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Hari</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">95%</div>
+                            <div class="stat-label">Progres</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="profile-main">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab('profile')">
+                        <i class="fas fa-user"></i> Profil
+                    </button>
+                    <button class="tab-button" onclick="switchTab('settings')">
+                        <i class="fas fa-cog"></i> Pengaturan
+                    </button>
+                    <button class="tab-button" onclick="switchTab('preferences')">
+                        <i class="fas fa-sliders-h"></i> Preferensi
+                    </button>
+                </div>
+
+                <!-- Tab Content: Profile -->
+                <div id="profile" class="tab-content active">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Informasi Pribadi</h3>
+                            <button class="btn btn-outline" onclick="enableEditProfile()">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm" class="form-grid" style="display: none;">
+                                <div class="form-group">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" id="editName" placeholder="Masukkan nama">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="editEmail" placeholder="Masukkan email">
+                                </div>
+                                <div class="form-group">
+                                    <label>No. Telepon</label>
+                                    <input type="tel" id="editPhone" placeholder="Masukkan nomor telepon">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Lahir</label>
+                                    <input type="date" id="editDOB">
+                                </div>
+                                <div class="form-group">
+                                    <label>Jenis Kelamin</label>
+                                    <select id="editGender">
+                                        <option>Pilih jenis kelamin</option>
+                                        <option>Laki-laki</option>
+                                        <option>Perempuan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Alamat</label>
+                                    <textarea id="editAddress" placeholder="Masukkan alamat"></textarea>
+                                </div>
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                    <button type="button" class="btn btn-outline" onclick="disableEditProfile()">Batal</button>
+                                </div>
+                            </form>
+
+                            <div id="profileDisplay">
+                                <div class="profile-info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">Nama Lengkap</span>
+                                        <p id="displayName">Siti Aisyah</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Email</span>
+                                        <p id="displayEmail">siti@example.com</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">No. Telepon</span>
+                                        <p id="displayPhone">-</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Tanggal Lahir</span>
+                                        <p id="displayDOB">-</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Jenis Kelamin</span>
+                                        <p id="displayGender">-</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Alamat</span>
+                                        <p id="displayAddress">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Member Since -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="member-info">
+                                <i class="fas fa-calendar"></i>
+                                <div>
+                                    <strong>Member Sejak</strong>
+                                    <p id="memberSince">15 Oktober 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Settings -->
+                <div id="settings" class="tab-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Keamanan & Akses</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="settings-section">
+                                <h4>Ubah Password</h4>
+                                <form class="form-grid">
+                                    <div class="form-group">
+                                        <label>Password Saat Ini</label>
+                                        <input type="password" placeholder="Masukkan password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password Baru</label>
+                                        <input type="password" placeholder="Masukkan password baru">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Konfirmasi Password</label>
+                                        <input type="password" placeholder="Konfirmasi password baru">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Ubah Password</button>
+                                </form>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="settings-section">
+                                <h4>Aktivitas Login</h4>
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div>
+                                            <strong>Windows - Chrome</strong>
+                                            <p>192.168.1.100 • Hari ini pukul 10:30</p>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm">Logout</button>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div>
+                                            <strong>iPhone - Safari</strong>
+                                            <p>203.0.113.45 • Kemarin pukul 14:22</p>
+                                        </div>
+                                        <button class="btn btn-outline btn-sm">Logout</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Preferences -->
+                <div id="preferences" class="tab-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Preferensi Notifikasi</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="preference-group">
+                                <div class="preference-item">
+                                    <div>
+                                        <strong>Email Notifikasi</strong>
+                                        <p>Terima notifikasi penting melalui email</p>
+                                    </div>
+                                    <label class="checkbox">
+                                        <input type="checkbox" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="preference-item">
+                                    <div>
+                                        <strong>Reminder Harian</strong>
+                                        <p>Pengingat untuk menyelesaikan modul atau meditasi</p>
+                                    </div>
+                                    <label class="checkbox">
+                                        <input type="checkbox" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="preference-item">
+                                    <div>
+                                        <strong>Notifikasi Pencapaian</strong>
+                                        <p>Pemberitahuan ketika Anda mencapai milestone</p>
+                                    </div>
+                                    <label class="checkbox">
+                                        <input type="checkbox" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <div class="preference-item">
+                                    <div>
+                                        <strong>Newsletter</strong>
+                                        <p>Dapatkan tips dan artikel kesehatan mental terbaru</p>
+                                    </div>
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Preferensi Akun</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="preference-group">
+                                <div class="form-group">
+                                    <label>Bahasa</label>
+                                    <select>
+                                        <option selected>Bahasa Indonesia</option>
+                                        <option>English</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Zona Waktu</label>
+                                    <select>
+                                        <option selected>Asia/Jakarta (UTC+7)</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary">Simpan Preferensi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <style>
+        .profile-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), #20d4b8);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+
+        .profile-card h2 {
+            margin: 0;
+            color: var(--black);
+        }
+
+        .profile-card p {
+            margin: 4px 0 20px;
+            color: var(--dark-gray);
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .profile-stats .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--dark-gray);
+            margin-top: 4px;
+        }
+
+        .profile-main {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            display: block;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .info-item p {
+            margin: 0;
+            color: var(--black);
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .member-info i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .member-info strong {
+            display: block;
+            color: var(--black);
+        }
+
+        .member-info p {
+            margin: 4px 0 0;
+            color: var(--dark-gray);
+        }
+
+        .settings-section {
+            margin-bottom: 24px;
+        }
+
+        .settings-section h4 {
+            margin: 0 0 16px 0;
+            color: var(--black);
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .activity-item strong {
+            display: block;
+            color: var(--black);
+        }
+
+        .activity-item p {
+            margin: 4px 0 0;
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+
+        .preference-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: 8px;
+        }
+
+        .preference-item strong {
+            display: block;
+            color: var(--black);
+        }
+
+        .preference-item p {
+            margin: 4px 0 0;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .checkbox {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .checkbox input {
+            display: none;
+        }
+
+        .checkbox span {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox input:checked + span {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 6px 12px !important;
+            font-size: 0.8rem !important;
+        }
+
+        @media (max-width: 1024px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .activity-item,
+            .preference-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+    </style>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.closest('.tab-button').classList.add('active');
+        }
+
+        // Edit profile functions
+        function enableEditProfile() {
+            document.getElementById('profileForm').style.display = 'grid';
+            document.getElementById('profileDisplay').style.display = 'none';
+        }
+
+        function disableEditProfile() {
+            document.getElementById('profileForm').style.display = 'none';
+            document.getElementById('profileDisplay').style.display = 'block';
+        }
+
+        // Load user data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = Utils.storage.get('user') || Utils.session.get('user');
+            if (user) {
+                document.getElementById('profileName').textContent = user.name;
+                document.getElementById('profileEmail').textContent = user.email;
+                document.getElementById('profileAvatar').textContent = Utils.getInitials(user.name);
+                document.getElementById('displayName').textContent = user.name;
+                document.getElementById('displayEmail').textContent = user.email;
+            }
+        });
+    </script>
+</body>
+</html>

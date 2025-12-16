@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Video - BetterLife Admin</title>
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+
+    <!-- ===== HEADER ===== -->
+    <header class="admin-header">
+        <div class="admin-nav">
+            <div class="admin-brand">
+                <i class="fas fa-heart"></i>
+                <span>BetterLife Admin</span>
+            </div>
+
+            <div class="admin-user-menu">
+                <span class="user-name">Admin</span>
+                <div class="user-dropdown">
+                    <a href="../index.html" class="dropdown-item">
+                        <i class="fas fa-home"></i> Website
+                    </a>
+                    <a href="../auth/login.html" class="dropdown-item logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== LAYOUT ===== -->
+    <div class="admin-layout">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="admin-sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="module-management.html" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>Modul CBT</span>
+                </a>
+                <a href="video-management.html" class="nav-item active">
+                    <i class="fas fa-video"></i>
+                    <span>Video</span>
+                </a>
+                <a href="podcast-management.html" class="nav-item">
+                    <i class="fas fa-podcast"></i>
+                    <span>Podcast</span>
+                </a>
+                <a href="user-management.html" class="nav-item">
+                    <i class="fas fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="admin-main">
+            <div class="page-header">
+                <h1>Manajemen Video</h1>
+                <button class="btn btn-primary" onclick="showAddVideoModal()">
+                    <i class="fas fa-plus"></i> Tambah Video
+                </button>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3>Daftar Video</h3>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Cari video..." id="searchVideo">
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Durasi</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="videoTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div id="addVideoModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Tambah Video Baru</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="videoForm" class="form-grid">
+                    <div class="form-group">
+                        <label>Judul Video *</label>
+                        <input type="text" id="videoTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori *</label>
+                        <select id="videoCategory" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="meditation">Meditasi</option>
+                            <option value="cbt">CBT</option>
+                            <option value="education">Edukasi</option>
+                            <option value="therapy">Terapi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea id="videoDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Durasi (menit) *</label>
+                        <input type="number" id="videoDuration" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Video File *</label>
+                        <div class="file-upload">
+                            <input type="file" id="videoFile" accept="video/*" required>
+                            <label for="videoFile" class="file-label">
+                                <i class="fas fa-upload"></i>
+                                <span>Pilih File Video</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Thumbnail</label>
+                        <div class="file-upload">
+                            <input type="file" id="videoThumbnail" accept="image/*">
+                            <label for="videoThumbnail" class="file-label">
+                                <i class="fas fa-image"></i>
+                                <span>Pilih Thumbnail</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                <button class="btn btn-primary" onclick="saveVideo()">
+                    <i class="fas fa-save"></i> Simpan Video
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="../assets/js/admin-video.js"></script>
+
+</body>
+</html>
+

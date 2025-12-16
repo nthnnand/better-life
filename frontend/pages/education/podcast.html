@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Podcast Kesehatan Mental</h1>
+            <p>Dengarkan cerita inspiratif dan tips dari ahli</p>
+        </div>
+
+        <div class="podcast-series">
+            <h2>Series Populer</h2>
+            <div class="series-grid">
+                <div class="series-card">
+                    <div class="series-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mind Matters</h3>
+                    <p>Diskusi tentang kesehatan mental dan kesejahteraan</p>
+                    <span class="episode-count">12 Episode</span>
+                </div>
+
+                <div class="series-card">
+                    <div class="series-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Self-Care Stories</h3>
+                    <p>Cerita tentang perjalanan self-care dan healing</p>
+                    <span class="episode-count">8 Episode</span>
+                </div>
+
+                <div class="series-card">
+                    <div class="series-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Mental Health Talks</h3>
+                    <p>Wawancara dengan psikolog dan terapis</p>
+                    <span class="episode-count">15 Episode</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="episodes-section">
+            <h2>Episode Terbaru</h2>
+            <div class="episodes-list" id="episodesContainer">
+                <!-- Episodes will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .podcast-series {
+            margin: 50px 0;
+        }
+
+        .podcast-series h2 {
+            color: var(--black);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .series-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .series-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .series-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .series-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--turquoise);
+            font-size: 2rem;
+        }
+
+        .series-card h3 {
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        .series-card p {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .episode-count {
+            color: var(--turquoise);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .episodes-section h2 {
+            color: var(--black);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .episodes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .episode-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .episode-card:hover {
+            transform: translateX(5px);
+        }
+
+        .episode-play {
+            width: 50px;
+            height: 50px;
+            background: var(--turquoise);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .episode-content {
+            flex: 1;
+        }
+
+        .episode-content h4 {
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .episode-content p {
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .episode-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--dark-gray);
+            font-size: 0.8rem;
+        }
+
+        .episode-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .series-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .episode-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .episode-meta {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <script>
+        // Sample podcast episodes
+        const episodes = [
+            {
+                id: 1,
+                title: "Mengatasi Overthinking dan Anxiety",
+                description: "Strategi praktis untuk menghentikan lingkaran pikiran berulang dan mengurangi kecemasan",
+                series: "Mind Matters",
+                duration: "45:30",
+                speaker: "Dr. Sarah Johnson",
+                date: "15 Nov 2024"
+            },
+            {
+                id: 2,
+                title: "Self-Care untuk Kesehatan Mental",
+                description: "Pentingnya self-care dan cara menerapkannya dalam kehidupan sehari-hari",
+                series: "Self-Care Stories",
+                duration: "35:15",
+                speaker: "Maria Williams",
+                date: "12 Nov 2024"
+            },
+            {
+                id: 3,
+                title: "Teknik Mindfulness dalam Bekerja",
+                description: "Cara tetap mindful dan fokus di tempat kerja yang penuh tekanan",
+                series: "Mental Health Talks",
+                duration: "52:10",
+                speaker: "Dr. Michael Chen",
+                date: "10 Nov 2024"
+            },
+            {
+                id: 4,
+                title: "Membangun Resilience Mental",
+                description: "Mengembangkan ketahanan mental untuk menghadapi tantangan hidup",
+                series: "Mind Matters",
+                duration: "38:45",
+                speaker: "Dr. Sarah Johnson",
+                date: "8 Nov 2024"
+            }
+        ];
+
+        function displayEpisodes() {
+            const container = document.getElementById('episodesContainer');
+            container.innerHTML = episodes.map(episode => `
+                <div class="episode-card">
+                    <div class="episode-play" onclick="playEpisode(${episode.id})">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="episode-content">
+                        <h4>${episode.title}</h4>
+                        <p>${episode.description}</p>
+                        <div class="episode-meta">
+                            <span><i class="fas fa-clock"></i> ${episode.duration}</span>
+                            <span><i class="fas fa-user"></i> ${episode.speaker}</span>
+                            <span><i class="fas fa-calendar"></i> ${episode.date}</span>
+                            <span><i class="fas fa-tag"></i> ${episode.series}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function playEpisode(episodeId) {
+            const episode = episodes.find(ep => ep.id === episodeId);
+            if (episode) {
+                alert(`Memutar episode: ${episode.title}\nSpeaker: ${episode.speaker}`);
+                // In real implementation, this would open an audio player
+            }
+        }
+
+        // Initial display
+        displayEpisodes();
+    </script>
+</body>
+</html>

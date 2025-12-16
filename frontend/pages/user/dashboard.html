@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BetterLife</title>
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i> BetterLife
+                </a>
+            </div>
+
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="../education/edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <h1>Dashboard Anda</h1>
+            <p>Selamat datang kembali! Lanjutkan perjalanan kesehatan mental Anda.</p>
+        </div>
+
+        <!-- MINI STATISTICS -->
+        <div class="dashboard-grid">
+            
+            <div class="dashboard-card">
+                <div class="dashboard-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Modul CBT Selesai</h3>
+                <p class="stat-number" id="modulesCompleted">5 Modul</p>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Streak Anda</h3>
+                <p class="stat-number" id="streakDays">7 Hari</p>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="dashboard-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Progress Keseluruhan</h3>
+                <p class="stat-number"><span id="progressPercent">75%</span></p>
+            </div>
+
+        </div>
+
+        <!-- AKTIVITAS TERBARU -->
+        <div class="section-title">
+            <h2>Aktivitas Terbaru</h2>
+        </div>
+
+        <div class="activity-grid">
+
+            <div class="activity-card">
+                <i class="fas fa-book activity-icon"></i>
+                <div>
+                    <h4>Menyelesaikan modul "Mengatasi Kecemasan"</h4>
+                    <p>Hari ini • 10:30</p>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <i class="fas fa-spa activity-icon"></i>
+                <div>
+                    <h4>Meditasi pagi 10 menit</h4>
+                    <p>Kemarin • 07:15</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- REKOMENDASI -->
+        <div class="section-title">
+            <h2>Rekomendasi Untuk Anda</h2>
+        </div>
+
+        <div class="recommendation-grid">
+
+            <a href="../cbt/cbt.html" class="recommendation-card">
+                <i class="fas fa-brain"></i>
+                <h3>Lanjutkan Modul CBT</h3>
+                <p>Pola Pikir Positif siap dilanjutkan</p>
+            </a>
+
+            <a href="../meditation/meditasi.html" class="recommendation-card">
+                <i class="fas fa-spa"></i>
+                <h3>Sesi Meditasi</h3>
+                <p>Meditasi pemandu 15 menit</p>
+            </a>
+
+            <a href="../education/video.html" class="recommendation-card">
+                <i class="fas fa-video"></i>
+                <h3>Video Edukasi</h3>
+                <p>Teknik mengelola stres</p>
+            </a>
+
+            <a href="../education/podcast.html" class="recommendation-card">
+                <i class="fas fa-podcast"></i>
+                <h3>Podcast Inspiratif</h3>
+                <p>Cerita positif tentang kesehatan mental</p>
+            </a>
+
+            <!-- REKOMENDASI JURNAL -->
+            <a href="../journal/jurnal.html" class="recommendation-card">
+                <i class="fas fa-book-open"></i>
+                <h3>Jurnal Harian</h3>
+                <p>Tulis perasaan dan refleksi harian Anda</p>
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- INLINE STYLE -->
+    <style>
+        .page-header {
+            text-align: center;
+            margin: 80px 0 40px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .dashboard-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .dashboard-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--turquoise);
+            margin: 0 auto 15px;
+        }
+
+        .stat-number {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-top: 10px;
+            color: var(--turquoise);
+        }
+
+        .section-title {
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .activity-grid {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .activity-card {
+            padding: 20px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .activity-icon {
+            font-size: 1.8rem;
+            color: var(--turquoise);
+        }
+
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .recommendation-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            text-decoration: none;
+            color: var(--black);
+            transition: 0.3s ease;
+        }
+
+        .recommendation-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .recommendation-card i {
+            font-size: 2rem;
+            color: var(--turquoise);
+            margin-bottom: 15px;
+        }
+    </style>
+
+</body>
+</html>

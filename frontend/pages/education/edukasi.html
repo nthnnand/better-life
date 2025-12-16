@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi - BetterLife</title>
+    <link rel="stylesheet" href="../../public/assets/css/main.css">
+    <link rel="stylesheet" href="../../public/assets/css/components.css">
+    <link rel="stylesheet" href="../../public/assets/css/responsive.css">
+    <link rel="stylesheet" href="../../public/assets/css/admin.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-heart"></i>
+                    BetterLife
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="../user/dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../cbt/cbt.html" class="nav-link">CBT</a>
+                <a href="../meditation/meditasi.html" class="nav-link">Meditasi</a>
+                <a href="edukasi.html" class="nav-link">Edukasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Pusat Edukasi</h1>
+            <p>Pelajari lebih dalam tentang kesehatan mental dan pengembangan diri</p>
+        </div>
+
+        <div class="education-tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="video">Video</button>
+                <button class="tab-btn" data-tab="podcast">Podcast</button>
+                <button class="tab-btn" data-tab="article">Artikel</button>
+            </div>
+
+            <div class="tab-content active" id="video-tab">
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="card-image">
+                            <img src="../assets/images/video-thumb-1.jpg" alt="Meditasi Pernapasan" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400'">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Teknik Pernapasan untuk Redakan Stres</h3>
+                            <p>Pelajari teknik pernapasan sederhana yang bisa dilakukan kapan saja</p>
+                            <div class="card-meta">
+                                <span>15 menit</span>
+                                <span>Pemula</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-image">
+                            <img src="../assets/images/video-thumb-2.jpg" alt="Mindfulness" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400'">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Praktik Mindfulness sehari-hari</h3>
+                            <p>Cara menerapkan mindfulness dalam aktivitas sehari-hari</p>
+                            <div class="card-meta">
+                                <span>20 menit</span>
+                                <span>Menengah</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="video.html" class="btn btn-outline">Lihat Semua Video</a>
+                </div>
+            </div>
+
+            <div class="tab-content" id="podcast-tab">
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="card-icon">
+                            <i class="fas fa-podcast"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Mengatasi Overthinking</h3>
+                            <p>Strategi praktis untuk menghentikan overthinking</p>
+                            <div class="card-meta">
+                                <span>45 menit</span>
+                                <span>Dr. Sarah Johnson</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="card-icon">
+                            <i class="fas fa-podcast"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Self-Care untuk Kesehatan Mental</h3>
+                            <p>Pentingnya self-care dalam menjaga kesehatan mental</p>
+                            <div class="card-meta">
+                                <span>35 menit</span>
+                                <span>Maria Williams</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a href="podcast.html" class="btn btn-outline">Lihat Semua Podcast</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .education-tabs {
+            margin: 50px 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--turquoise);
+            border-bottom-color: var(--turquoise);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .content-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--turquoise);
+            font-size: 1.5rem;
+        }
+
+        .card-icon {
+            height: 120px;
+            background: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--turquoise);
+            font-size: 3rem;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 15px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .view-all {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .tab-buttons {
+                flex-direction: column;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab + '-tab').classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

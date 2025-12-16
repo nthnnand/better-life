@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - BetterLife</title>
+    <link rel="stylesheet" href="public/assets/css/main.css">
+    <link rel="stylesheet" href="public/assets/css/components.css">
+    <link rel="stylesheet" href="public/assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="auth-page admin-login">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <i class="fas fa-shield-alt"></i>
+                <h1>Admin BetterLife</h1>
+                <p>Area administrator sistem</p>
+            </div>
+
+            <form id="adminLoginForm" class="auth-form">
+                <div class="form-group">
+                    <label>Username Admin</label>
+                    <input type="text" id="adminUsername" required placeholder="Username admin">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" required placeholder="Password administrator">
+                </div>
+
+                <div class="form-group">
+                    <label>Security Code</label>
+                    <input type="text" id="securityCode" required placeholder="Kode keamanan">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-lock"></i> Masuk sebagai Admin
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <a href="login.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Login sebagai User
+                </a>
+                <a href="../index.html" class="back-link">
+                    <i class="fas fa-home"></i> Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../../public/assets/js/admin.js"></script>
+    </body>
+</html>
