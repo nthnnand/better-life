@@ -1,42 +1,55 @@
-const User = require("../models/User");
+const db = require("../config/db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-exports.register = (req, res) => {
+// REGISTER (OPTIONAL, BASIC)
+exports.register = async (req, res) => {
   const { name, email, password } = req.body;
 
-  User.findByEmail(email, (err, rows) => {
-    if (rows.length > 0) return res.status(400).json({ msg: "Email sudah terdaftar" });
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    bcrypt.hash(password, 10, (err, hashed) => {
-      User.create({ name, email, password: hashed }, (err) => {
-        if (err) return res.status(500).json({ msg: "DB Error" });
-        res.json({ msg: "Registrasi Berhasil" });
-      });
-    });
+  const sql =
+    "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')";
+
+  db.query(sql, [name, email, hashedPassword], (err) => {
+    if (err) return res.status(500).json({ msg: "Register gagal" });
+    res.json({ msg: "Register berhasil" });
   });
 };
 
+// LOGIN + ROLE
 exports.login = (req, res) => {
   const { email, password } = req.body;
 
-  User.findByEmail(email, (err, rows) => {
-    if (rows.length === 0) return res.status(400).json({ msg: "Email tidak ditemukan" });
+  const sql = "SELECT * FROM users WHERE email = ?";
+  db.query(sql, [email], async (err, result) => {
+    if (err) return res.status(500).json({ msg: "Server error" });
+    if (result.length === 0)
+      return res.status(401).json({ msg: "Email tidak ditemukan" });
 
-    const user = rows[0];
+    const user = result[0];
+    const isMatch = await bcrypt.compare(password, user.password);
 
-    bcrypt.compare(password, user.password, (err, ok) => {
-      if (!ok) return res.status(400).json({ msg: "Password salah" });
+    if (!isMatch)
+      return res.status(401).json({ msg: "Password salah" });
 
-      const token = jwt.sign({ id: user.id }, "secretkey");
+    const token = jwt.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
 
-      res.json({ msg: "Login berhasil", token });
+    res.json({
+      token,
+      role: user.role
     });
   });
 };
 
+// PROFILE
 exports.getProfile = (req, res) => {
-  User.findById(req.userId, (err, rows) => {
-    res.json(rows[0]);
+  res.json({
+    id: req.user.id,
+    role: req.user.role
   });
 };

@@ -1,15 +1,16 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
+exports.verifyToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
 
-  if (!token) return res.status(401).json({ msg: "Token tidak ada" });
-
-  try {
-    const decoded = jwt.verify(token, "secretkey");
-    req.userId = decoded.id;
-    next();
-  } catch {
-    res.status(401).json({ msg: "Token tidak valid" });
+  if (!token) {
+    return res.status(401).json({ msg: "Token tidak ada" });
   }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ msg: "Token tidak valid" });
+    req.user = user;
+    next();
+  });
 };

@@ -57,11 +57,12 @@
     <!-- SCRIPT LOGIN -->
     <script>
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
+    try { 
         const res = await fetch("http://localhost:5000/api/user/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -70,14 +71,27 @@
 
         const data = await res.json();
 
-        if (res.ok) {
-            localStorage.setItem("token", data.token);
-            alert("Login berhasil!");
-            window.location.href = "../../pages/user/dashboard.html";
-        } else {
+        if (!res.ok) {
             alert(data.msg || "Login gagal");
+            return;
         }
+
+        // SIMPAN TOKEN
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
+
+        // REDIRECT BERDASARKAN ROLE
+        if (data.role === "admin") {
+            window.location.href = "../admin/dashboard.html";
+        } else {
+            window.location.href = "../user/dashboard.html";
+        }
+
+    } catch (err) {
+        alert("Tidak bisa terhubung ke server");
+    }
     });
     </script>
+
 </body>
 </html>
